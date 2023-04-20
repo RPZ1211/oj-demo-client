@@ -1,0 +1,58 @@
+/*消除网页内边距*/
+*{
+    margin: 0;
+    outline: 0 none;
+    padding: 0;
+}
+body{
+    background: #F4F5F7;
+}
+.white{
+    color: white;
+}
+
+/*设置文字不可选中*/
+.no-select {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+/*鼠标变小手*/
+.pointer{
+    cursor: pointer;
+}
+
+/*覆写elementUI 分割线样式*/
+.el-divider--horizontal{
+    margin: 0.729vw 0!important;
+}
+.editor-toolbar{
+    border-radius:10px!important;
+}
+/*覆写富文本编辑器激活态样式*/
+.ck.ck-editor__editable.ck-focused:not(.ck-editor__nested-editable){
+    border-radius: 0.521vw!important;
+    box-shadow: none!important;
+}
+
+/*隐藏滚动条*/
+::-webkit-scrollbar {
+    display: none; /* Chrome Safari */
+}
+*{
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+}
+.monaco-scrollable-element > .scrollbar > .slider{
+    background: rgba(0,0,0,0)!important;
+}
+.decorationsOverviewRuler{
+    display: none!important;
+}
+
+.t-head-menu__inner{
+    background-color: #005faf!important;
+}
