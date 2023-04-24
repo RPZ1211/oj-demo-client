@@ -56,3 +56,6 @@ body{
 .t-head-menu__inner{
     background-color: #005faf!important;
 }
+.github-markdown-body{
+    padding: 0!important;
+}

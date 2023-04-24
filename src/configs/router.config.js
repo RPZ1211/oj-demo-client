@@ -18,6 +18,11 @@ const router=new Router({
             name:'tmq',
             component:()=>import('@/views/tmq')
         },
+        {
+            path:'/gpt',
+            name:'gpt',
+            component:()=>import('@/views/gpt')
+        },
     ]
 })
 

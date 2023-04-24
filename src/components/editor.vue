@@ -117,6 +117,7 @@
 
 <script>
 import monacoEditor from "@/components/monacoEditor";
+import {codeTest} from "@/api/code.api";
 
 export default {
   name: "editor",
@@ -164,6 +165,26 @@ export default {
   },
 
   methods: {
+
+    /**
+     * 获取编辑器中的代码
+     */
+    async getCode() {
+      console.log(this.monacoEditor.getValue().toString())
+      let params = {
+        code:this.monacoEditor.getValue().toString(),
+        // code: "tmp = input()\r\nstr = tmp.split(' ')\r\na = int(str[0])\r\nb = int(str[1])\r\nprint(a+b)",
+        input_case: ["123 123"],
+        output_case: ["246"],
+        time: 1000,
+        memory: 100000,
+        language: "python",
+        result_type: "str"
+      }
+      let res = await codeTest(params)
+      console.log("带吗测试结果如下：",res)
+      localStorage.setItem('editorCode', this.monacoEditor.getValue())
+    },
 
     /**
      * 展示底部弹窗

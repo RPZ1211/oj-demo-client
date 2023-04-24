@@ -18,7 +18,7 @@
 
       <!-- 上方题目区 -->
       <div class="qf-question">
-        <question-detail :question="currentQuestion" :state="state" :isShowProgrammingResult.sync="isShowProgrammingResult"></question-detail>
+        <question-detail ref="questionDetail" :question="currentQuestion" :state="state" :isShowProgrammingResult.sync="isShowProgrammingResult"></question-detail>
         <question-analysis v-show="currentQuestion.isShowAnalysis" :question="currentQuestion"></question-analysis>
       </div>
 
@@ -66,24 +66,6 @@ export default {
       type: Array,
       default: () => {
         return [
-          // {
-          //   type: 1,
-          //   title: "在绘图编辑器的矢量图模式下，不可直接绘制的图形是（    ）",
-          //   options: ["线段", "圆", "三角形", "矩形"],
-          //   answer: "",
-          // },
-          // {
-          //   type: 2,
-          //   title: "关于C++你了解什么？",
-          //   options: ["正确", "错误"],
-          //   answer: "",
-          // },
-          // {
-          //   type: 3,
-          //   title: "1+1=2",
-          //   options: [],
-          //   answer: "",
-          // },
           {
             type: 4,
             title: "简单题 - A PAT首页",
@@ -174,6 +156,10 @@ export default {
             this.commitOperation();
           } else {
             // 编程题
+            // 调用子组件事件，打印编辑器中的代码并缓存代码到
+            this.$refs.questionDetail.consoleCode()
+
+
             this.isShowProgrammingResult = true; // 展示提交弹窗
             this.currentQuestion.isShowPrevSubmit = true; // 展示查看上次提交按钮
           }

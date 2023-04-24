@@ -43,7 +43,7 @@
 
     <!-- OJ -->
     <div v-show="isFullScreen === false" class="pq-editor">
-      <editor @fullScreen="isFullScreen = true" :isFullScreen="isFullScreen"></editor>
+      <editor ref="ojEditor" @fullScreen="isFullScreen = true" :isFullScreen="isFullScreen"></editor>
     </div>
 
     <!-- 全屏OJ -->
@@ -82,6 +82,7 @@
 <script>
 import editor from "@/components/editor"
 import monacoEditor from "@/components/monacoEditor";
+import {codeTest} from "@/api/code.api";
 
 export default {
   name: "programmingQuestion",
@@ -99,6 +100,8 @@ export default {
   },
 
   computed: {
+
+
     // 是否显示编程题提交结果
     isShowResult: {
       get() {
@@ -121,6 +124,13 @@ export default {
   },
 
   methods: {
+
+    /**
+     * 触发子组件方法，打印编辑器中的代码,提交代码并获取返回结果渲染
+     */
+    consoleCode(){
+      this.$refs.ojEditor.getCode()
+    },
 
     /**
      * 设置状态列文字颜色

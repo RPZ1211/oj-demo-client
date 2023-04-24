@@ -24,9 +24,9 @@
       <div id="tmq-box" class="tmq-box">
         <div v-for="item in chatLogs" class="tmq-chat">
           <common
-          :author="item.author"
-          :avatar="item.avatar"
-          :content="item.content">
+              :author="item.author"
+              :avatar="item.avatar"
+              :content="item.content">
           </common>
         </div>
       </div>
@@ -47,11 +47,10 @@
 import {
   SearchIcon, MailIcon, UserIcon, EllipsisIcon,
 } from 'tdesign-icons-vue';
-import axios from "axios";
 import {toMessage} from "@/api/gpt.api";
 import Common from "@/components/common.vue";
 export default {
-  name: "tmq",
+  name: "gpt",
   components: {
     Common,
     SearchIcon,
@@ -67,8 +66,8 @@ export default {
       chatLogs:[
         {
           avatar:'https://upload.wikimedia.org/wikipedia/zh/c/ce/HNU_Logo_in_2007.png',
-          author:'情感分析精灵',
-          content:'你好，我是情感分析精灵'
+          author:'GPT🤖',
+          content:'你好，我是NB-GPT'
         }
       ],
       chat_id:new Date().getTime().toString()
@@ -86,7 +85,7 @@ export default {
 
     async toMessage(){
       let params={
-        user_text:'请帮我判断下面这句话表达了正面情绪还是负面情绪，如果是正面情绪则返回1，反正返回0，除了1和0请不要返回其他任何信息，请判断：'+this.userText,
+        user_text:this.userText,
         chat_id:this.chat_id
       }
       let userChat={
@@ -102,8 +101,8 @@ export default {
       if(res.status===200){
         let gptChat={
           avatar:'https://upload.wikimedia.org/wikipedia/zh/c/ce/HNU_Logo_in_2007.png',
-          author:'情感分析精灵',
-          content:res.data==="0"?"负面情绪😭":"正面情绪😊"
+          author:'GPT🤖',
+          content:res.data
         }
         this.chatLogs.push(gptChat)
         this.scrollBox()

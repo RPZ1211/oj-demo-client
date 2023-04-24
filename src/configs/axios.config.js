@@ -7,9 +7,9 @@ let request = axios.create({
 
 //判断是否是生产环境
 if (process.env.NODE_ENV === 'development') {
-    request.defaults.baseURL = 'http:///10.100.158.25:7777'//本地开发环境
+    request.defaults.baseURL = 'http://127.0.0.1:5000'//本地开发环境
 } else if (process.env.NODE_ENV === 'production') {
-    request.defaults.baseURL = 'http://162.14.109.182:9500'//正式环境
+    request.defaults.baseURL = 'http://43.139.117.81:5000'//正式环境
 }
 
 request.defaults.headers.get['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8'

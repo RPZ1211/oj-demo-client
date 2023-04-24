@@ -17,19 +17,11 @@ export default {
     }, // 编译器语言
     value: {
       type: String,
-      default:
-`#include <stdio.h>
-#include <stdlib.h>
-#define PI 3.1415926
-int main(void)
-{
-    double r, surface, volume;
-    printf("");
-    scanf("%lf",&r);
-    surface = 4*PI*pow(r,2);
-    volume = 4.0/3.0*PI*pow(r,3);
-    printf("s=%.2f\\n", surface);
-}`
+      default: `tmp = input()
+str = tmp.split(' ')
+a = int(str[0])
+b = int(str[1])
+print(a+b)`
     }, // 初始化内容
     readOnly: {
       type: Boolean,

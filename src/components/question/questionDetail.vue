@@ -32,6 +32,7 @@
       <!-- 程序题 -->
       <template v-else-if="question.type === 4 && state !== 4">
         <programming-question
+            ref="pq"
             @changeShowProgrammingResult="(value) => {$emit('update:isShowProgrammingResult', value)}"
             :isShowProgrammingResult="isShowProgrammingResult"
         />
@@ -59,6 +60,14 @@ export default {
   },
 
   methods: {
+
+    /**
+     * 调用子组件方法
+     */
+    consoleCode() {
+      console.log("====>questionDetail")
+      this.$refs.pq.consoleCode()
+    },
 
     /**
      * 点击选项
