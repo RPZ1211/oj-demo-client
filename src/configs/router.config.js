@@ -23,6 +23,11 @@ const router=new Router({
             name:'gpt',
             component:()=>import('@/views/gpt')
         },
+        {
+            path:'/gpt35',
+            name:'gpt35',
+            component:()=>import('@/views/gpt35')
+        },
     ]
 })
 

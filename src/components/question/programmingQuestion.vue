@@ -54,7 +54,7 @@
     <!-- 提交弹窗 -->
     <el-dialog title="上次提交结果" :visible.sync="isShowResult">
       <!-- 测试点 -->
-      <el-table :data="resultDatas" :cell-style="setStateColor" max-height="240px">
+      <el-table :data="codeRunResult" :cell-style="setStateColor" max-height="240px">
         <el-table-column prop="date" label="提交时间" width="160"></el-table-column>
         <el-table-column prop="state" label="状态" width="150" class-name="pq-result-state"></el-table-column>
         <el-table-column prop="score" label="分数" width="150"></el-table-column>
@@ -83,6 +83,7 @@
 import editor from "@/components/editor"
 import monacoEditor from "@/components/monacoEditor";
 import {codeTest} from "@/api/code.api";
+import {mapState} from "vuex";
 
 export default {
   name: "programmingQuestion",
@@ -101,6 +102,9 @@ export default {
 
   computed: {
 
+    ...mapState({
+      codeRunResult:(state)=>state.codeRunResult
+    }),
 
     // 是否显示编程题提交结果
     isShowResult: {
@@ -120,7 +124,7 @@ export default {
   },
 
   created() {
-    this.getResultDatas();
+    // this.getResultDatas();
   },
 
   methods: {

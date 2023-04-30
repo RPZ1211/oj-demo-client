@@ -179,10 +179,27 @@ export default {
         time: 1000,
         memory: 100000,
         language: "python",
-        result_type: "str"
+        result_type: "json"
       }
+      let start_time=new Date().getTime()
       let res = await codeTest(params)
-      console.log("带吗测试结果如下：",res)
+      let end_time=new Date().getTime()
+      console.log("耗时：",end_time-start_time)
+      console.log("代码测试结果如下：",res)
+      let codeRunResult=[]
+      let resultState = ["答案正确", "编译错误", "答案错误", "运行超时", "运行时错误"];
+      for (let i=0;i<res.data.result.length;i++){
+        let data={
+          date: new Date().getTime(), // 提交时间
+          state: resultState[res.data.result[i].result],//case
+          score: 20, // 分数
+          compiler: res.data.language, // 编译器
+          memory: res.data.result[i].memoryused, // 内存
+          spentTime: res.data.result[i].timeused // 用时
+        }
+        codeRunResult.push(data)
+      }
+      this.$store.commit('updateCodeRunResult',codeRunResult)
       localStorage.setItem('editorCode', this.monacoEditor.getValue())
     },
 

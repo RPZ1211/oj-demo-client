@@ -14,6 +14,8 @@ import githubTheme from '@kangc/v-md-editor/lib/theme/github.js';
 import '@kangc/v-md-editor/lib/theme/style/github.css';
 import hljs from 'highlight.js';
 
+import {store} from "@/configs/vuex.config";
+
 VMdPreview.use(githubTheme, {
   Hljs: hljs,
 });
@@ -26,6 +28,7 @@ Vue.config.productionTip = false
 
 Vue.use(ElementUI)
 new Vue({
+  store,
   router,
   render: h => h(App),
 }).$mount('#app')
