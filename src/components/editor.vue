@@ -174,8 +174,8 @@ export default {
       let params = {
         code:this.monacoEditor.getValue().toString(),
         // code: "tmp = input()\r\nstr = tmp.split(' ')\r\na = int(str[0])\r\nb = int(str[1])\r\nprint(a+b)",
-        input_case: ["123 123"],
-        output_case: ["246"],
+        input_case: ["123 123","123 122"],
+        output_case: ["246","246"],
         time: 1000,
         memory: 100000,
         language: "python",
@@ -187,7 +187,7 @@ export default {
       console.log("耗时：",end_time-start_time)
       console.log("代码测试结果如下：",res)
       let codeRunResult=[]
-      let resultState = ["答案正确", "编译错误", "答案错误", "运行超时", "运行时错误"];
+      let resultState = ["答案正确", "1", "运行超时", "3", "答案错误","编译错误"];
       for (let i=0;i<res.data.result.length;i++){
         let data={
           date: new Date().getTime(), // 提交时间
