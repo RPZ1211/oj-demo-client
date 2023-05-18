@@ -17,3 +17,7 @@ import {post} from "@/configs/axios.config";
 export const codeTest=(params)=>{
     return post("/oj_run_v2",params)
 }
+
+export const codeTest_v1=(params)=>{
+    return post("/oj_run_v1",params)
+}

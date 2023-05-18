@@ -117,7 +117,8 @@
 
 <script>
 import monacoEditor from "@/components/monacoEditor";
-import {codeTest} from "@/api/code.api";
+import {codeTest, codeTest_v1} from "@/api/code.api";
+import {inputCase, outPutCase} from "@/components/case";
 
 export default {
   name: "editor",
@@ -174,33 +175,59 @@ export default {
       let params = {
         code:this.monacoEditor.getValue().toString(),
         // code: "tmp = input()\r\nstr = tmp.split(' ')\r\na = int(str[0])\r\nb = int(str[1])\r\nprint(a+b)",
-        input_case: ["123 123","123 122"],
-        output_case: ["246","246"],
+        input_case: inputCase,
+        output_case: outPutCase,
         time: 1000,
         memory: 100000,
         language: "python",
         result_type: "json"
       }
       let start_time=new Date().getTime()
+      this.$store.commit('updateIsRun',true)
       let res = await codeTest(params)
+
+
+      console.log(typeof res.data)
+
+
+      this.$store.commit('updateIsRun',false)
       let end_time=new Date().getTime()
       console.log("耗时：",end_time-start_time)
       console.log("代码测试结果如下：",res)
       let codeRunResult=[]
       let resultState = ["答案正确", "1", "运行超时", "3", "答案错误","编译错误"];
-      for (let i=0;i<res.data.result.length;i++){
-        let data={
-          date: new Date().getTime(), // 提交时间
-          state: resultState[res.data.result[i].result],//case
-          score: 20, // 分数
-          compiler: res.data.language, // 编译器
-          memory: res.data.result[i].memoryused, // 内存
-          spentTime: res.data.result[i].timeused // 用时
+      if(!res.data.count){
+        console.log("====",res.data)
+        for (let i = 0; i < res.data.length; i++) {
+          let d=JSON.parse(res.data[i])
+          console.log(d)
+          for (let j=0;j<d.result.length;j++){
+            let data={
+              date: new Date().getTime(), // 提交时间
+              state: resultState[d.result[j].result],//case
+              score: d.result[j].result===0?20:0, // 分数
+              compiler: d.language, // 编译器
+              memory: d.result[j].memoryused, // 内存
+              spentTime: d.result[j].timeused // 用时
+            }
+            codeRunResult.push(data)
+          }
         }
-        codeRunResult.push(data)
+      }else {
+        for (let i=0;i<res.data.result.length;i++){
+          let data={
+            date: new Date().getTime(), // 提交时间
+            state: resultState[res.data.result[i].result],//case
+            score: res.data.result[i].result===0?20:0, // 分数
+            compiler: res.data.language, // 编译器
+            memory: res.data.result[i].memoryused, // 内存
+            spentTime: res.data.result[i].timeused // 用时
+          }
+          codeRunResult.push(data)
+        }
       }
       this.$store.commit('updateCodeRunResult',codeRunResult)
-      localStorage.setItem('editorCode', this.monacoEditor.getValue())
+      this.$store.commit('updateRunTime',end_time-start_time)
     },
 
     /**

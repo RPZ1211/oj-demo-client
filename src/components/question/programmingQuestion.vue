@@ -53,14 +53,16 @@
 
     <!-- 提交弹窗 -->
     <el-dialog title="上次提交结果" :visible.sync="isShowResult">
+      <div style="margin-bottom: 12px">系统耗时: <span style="color: #4c8f2a;font-weight: 1000">{{runTime/1000}}</span> 秒</div>
       <!-- 测试点 -->
-      <el-table :data="codeRunResult" :cell-style="setStateColor" max-height="240px">
-        <el-table-column prop="date" label="提交时间" width="160"></el-table-column>
-        <el-table-column prop="state" label="状态" width="150" class-name="pq-result-state"></el-table-column>
-        <el-table-column prop="score" label="分数" width="150"></el-table-column>
-        <el-table-column prop="compiler" label="编译器" width="150"></el-table-column>
-        <el-table-column prop="memory" label="内存" width="150"></el-table-column>
-        <el-table-column prop="spentTime" label="用时" width="150"></el-table-column>
+      <el-table  type="index" v-loading="isRun" :data="codeRunResult" :cell-style="setStateColor" max-height="240px">
+<!--        <el-table-column prop="date" label="编号" width="160"></el-table-column>-->
+        <el-table-column label="编号" width="100" type="index"></el-table-column>
+        <el-table-column prop="state" label="状态" width="120" class-name="pq-result-state"></el-table-column>
+        <el-table-column prop="score" label="分数" width="120"></el-table-column>
+        <el-table-column prop="compiler" label="编译器" width="120"></el-table-column>
+        <el-table-column prop="memory" label="内存" width="120"></el-table-column>
+        <el-table-column prop="spentTime" label="用时" width="120"></el-table-column>
       </el-table>
 
       <!-- 代码 -->
@@ -103,7 +105,9 @@ export default {
   computed: {
 
     ...mapState({
-      codeRunResult:(state)=>state.codeRunResult
+      codeRunResult:(state)=>state.codeRunResult,
+      runTime:(state)=>state.runTime,
+      isRun:(state)=>state.isRun
     }),
 
     // 是否显示编程题提交结果
