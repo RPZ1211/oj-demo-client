@@ -7,22 +7,21 @@
 
       <!-- 标题 & 分值 -->
       <div class="pq-question-top">
-        <div class="pq-question-title">4.1 简单题 - A PAT首页</div>
+        <div class="pq-question-title">最长字符串</div>
         <div class="pq-question-top-score">5分</div>
       </div>
 
       <!-- 题目内容 -->
-      <div class="pq-question-content">给你一个长度为 n 下标从 0 开始的字符串 blocks ，blocks[i] 要么是 'W' 要么是 'B' ，表示第 i 块的颜色。字符 'W'
-        和 'B' 分别表示白色和黑色。给你一个整数 k ，表示想要 连续 黑色块的数目。每一次操作中，你可以选择一个白色块将它 涂成 黑色块。请你返回至少出现 一次 连续 k 个黑色块的 最少 操作次数。
+      <div class="pq-question-content">求出5个字符串中最长的字符串。每个字符串长度在100以内，且全为小写字母。
       </div>
 
       <!-- 输入示例 -->
       <div class="pq-question-IO-title">输入示例：</div>
-      <div class="pq-question-IO-content">本题没有输入。</div>
+      <div class="pq-question-IO-content">one two three four five</div>
 
       <!-- 输出示例 -->
       <div class="pq-question-IO-title">输出示例：</div>
-      <div class="pq-question-IO-content">球的体积和表面积在不同行输出，均保留两位小数。参看输出样例。例：s=50.27v=33.51</div>
+      <div class="pq-question-IO-content">three</div>
 
       <!-- 题目限制 -->
       <div class="pq-question-restriction">
@@ -55,7 +54,7 @@
     <el-dialog title="上次提交结果" :visible.sync="isShowResult">
       <div style="margin-bottom: 12px">系统耗时: <span style="color: #4c8f2a;font-weight: 1000">{{runTime/1000}}</span> 秒</div>
       <!-- 测试点 -->
-      <el-table  type="index" v-loading="isRun" :data="codeRunResult" :cell-style="setStateColor" max-height="240px">
+      <el-table  type="index" v-loading="isRun" :data="codeRunResult" :cell-style="setStateColor" max-height="340px">
 <!--        <el-table-column prop="date" label="编号" width="160"></el-table-column>-->
         <el-table-column label="编号" width="100" type="index"></el-table-column>
         <el-table-column prop="state" label="状态" width="120" class-name="pq-result-state"></el-table-column>
@@ -66,10 +65,10 @@
       </el-table>
 
       <!-- 代码 -->
-      <div class="pq-result-code">
-        <div class="pq-result-code-text">代码</div>
-        <monaco-editor @editorMounted="(monacoEditor) => {this.monacoEditor = monacoEditor}" readOnly/>
-      </div>
+<!--      <div class="pq-result-code">-->
+<!--        <div class="pq-result-code-text">代码</div>-->
+<!--        <monaco-editor @editorMounted="(monacoEditor) => {this.monacoEditor = monacoEditor}" readOnly/>-->
+<!--      </div>-->
 
       <!-- 确定、取消 -->
       <template #footer>

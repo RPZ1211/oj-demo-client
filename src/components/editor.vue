@@ -134,7 +134,7 @@ export default {
       monacoEditor: {}, // 代码编辑器 this.editor.getValue() 获取文本内容
       IOEditor: {}, // 输入、输出编辑器
 
-      language: "C(gcc)", // 语言选择
+      language: "Python(python3)", // 语言选择
       languageOptions: ["C(gcc)", "C++(g++)", "java(javac)", "Python(python2)", "Python(python3)", "JavaScript(node)"], // 语言数据
       fontSize: 14, // 字号选择
       fontSizeOptions: [4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24], // 字号数据
@@ -175,8 +175,8 @@ export default {
       let params = {
         code:this.monacoEditor.getValue().toString(),
         // code: "tmp = input()\r\nstr = tmp.split(' ')\r\na = int(str[0])\r\nb = int(str[1])\r\nprint(a+b)",
-        input_case: inputCase,
-        output_case: outPutCase,
+        input_case: inputCase.slice(0,10),
+        output_case: outPutCase.slice(0,10),
         time: 1000,
         memory: 100000,
         language: "python",
@@ -195,7 +195,7 @@ export default {
       console.log("耗时：",end_time-start_time)
       console.log("代码测试结果如下：",res)
       let codeRunResult=[]
-      let resultState = ["答案正确", "1", "运行超时", "3", "答案错误","编译错误"];
+      let resultState = ["答案正确", "1", "运行超时", "3", "答案错误","运行时错误"];
       if(!res.data.count){
         console.log("====",res.data)
         for (let i = 0; i < res.data.length; i++) {
